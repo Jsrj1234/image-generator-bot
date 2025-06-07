@@ -53,9 +53,7 @@ app.post("/", async (req, res) => {
 
     const text = `*👋 Welcome* [${user.first_name}](tg://user?id=${user.id})\n
 *🎨 I'm PixaAi – your AI-powered image generator!*\n
-\n 🖊️ *Just send me your idea or prompt* (for example: “a futuristic city at sunset”), and I’ll create an image for you.\n
-\n 🕐 *Please wait a moment...* I’ll send your AI-generated image shortly!\n
-\n ⚡ Let’s turn your thoughts into art – right now!`;
+\n 🖊️ *Just send me your idea or prompt* (for example: “a futuristic city at sunset”), and I’ll create an image for you.\n 🕐 *Please wait a moment...* I’ll send your AI-generated image shortly!\n ⚡ Let’s turn your thoughts into art – right now!`;
 
     await bot.sendMessage(chatId, text, {
       parse_mode: "Markdown",
