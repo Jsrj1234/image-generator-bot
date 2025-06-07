@@ -3,9 +3,9 @@ const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
 const fetch = require("node-fetch");
 
-const token = "BOT_TOKEN";
-const admin = "USERID";
-const DATABASE_URL = "DATABASE_URL"; 
+const token = "8048207805:AAGD6-3xD-i6NudVUNg8m9PDOI8yvR--4VI";
+const admin = "7251306600";
+const DATABASE_URL = "https://pixaai-f6dea-default-rtdb.firebaseio.com/"; 
 const WEBHOOK_URL = "VERCEL_URL";
 
 const bot = new TelegramBot(token, { webHook: { port: false } });
@@ -51,7 +51,7 @@ app.post("/", async (req, res) => {
   const response = await fetch(userUrl);
   const exists = await response.json();
 
-  const text = `*👋 Welcome* [${user.first_name}](tg://user?id=${user.id})\n\n*🤗 Using Me You Can Create Image, So Share Me Your Thoughts*`;
+  const text = `*👋 Welcome* [${user.first_name}](tg://user?id=${user.id})\n\n*💝 Using Me You Can Create Image, So Share Me Your Prompt*`;
 
   await bot.sendMessage(chatId, text, {
     parse_mode: "Markdown",
@@ -118,11 +118,11 @@ app.post("/", async (req, res) => {
       const caption =
         "*👆 Here Is Your Generated Image\n\n💭 Your Prompt:*\n`" +
         msg.text +
-        "`\n\n*🧑‍💻 Created By:* [BOTNAME](https://telegram.dog/BOT_USERNAME)";
+        "`\n\n*🧑‍💻 Created By:* [PixaAi](https://telegram.dog/PixaAiBot)";
       const keyboard = {
         reply_markup: {
           inline_keyboard: [
-            [{ text: "🧑‍💻 Developer", url: "https://telegram.dog/DEVELOPER" }]
+            [{ text: "🧑‍💻 Developer", url: "https://telegram.dog/Death_robot" }]
           ]
         },
         parse_mode: "Markdown",
