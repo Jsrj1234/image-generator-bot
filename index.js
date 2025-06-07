@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 
 const token = "8048207805:AAGD6-3xD-i6NudVUNg8m9PDOI8yvR--4VI";
 const admin = "7251306600";
-const DATABASE_URL = "https://pixaai-f6dea-default-rtdb.firebaseio.com/"; 
+const DATABASE_URL = "https://pixaai-f6dea-default-rtdb.firebaseio.com/";
 const WEBHOOK_URL = "https://image-generator-bot-three.vercel.app/";
 
 const bot = new TelegramBot(token, { webHook: { port: false } });
@@ -47,37 +47,44 @@ app.post("/", async (req, res) => {
   const user = msg.from;
 
   if (msg.text === "/start") {
-  const userUrl = `${DATABASE_URL}/users/${user.id}.json`;
-  const response = await fetch(userUrl);
-  const exists = await response.json();
+    const userUrl = `${DATABASE_URL}/users/${user.id}.json`;
+    const response = await fetch(userUrl);
+    const exists = await response.json();
 
-  
-  await bot.sendMessage(chatId, text, {
-    parse_mode: "Markdown",
-    disable_web_page_preview: true,
-    reply_to_message_id: msg.message_id
-  });
+    const text = `*👋 Welcome* [${user.first_name}](tg://user?id=${user.id})\n
+*🎨 I'm PixaAi – your AI-powered image generator!*\n
+\n
+🖊️ *Just send me your idea or prompt* (for example: “a futuristic city at sunset”), and I’ll create an image for you.\n
+\n
+🕐 *Please wait a moment...* I’ll send your AI-generated image shortly!\n
+\n
+⚡ Let’s turn your thoughts into art – right now!`;
 
-  if (!exists) {
-    await saveUserToFirebase(user);
-    const totalUsers = await getTotalUsers();
-    const newUserMsg =
-      "➕ <b>New User Notification</b> ➕\n\n" +
-      "👤<b>User:</b> <a href='tg://user?id=" +
-      user.id +
-      "'>" +
-      user.first_name +
-      "</a>\n\n" +
-      "🆔<b>User ID:</b> <code>" +
-      user.id +
-      "</code>\n\n" +
-      "🌝 <b>Total Users Count: " +
-      totalUsers +
-      "</b>";
-    await bot.sendMessage(admin, newUserMsg, { parse_mode: "HTML" });
-  }
-}
-   else if (msg.text === "/broadcast" && user.id.toString() === admin) {
+    await bot.sendMessage(chatId, text, {
+      parse_mode: "Markdown",
+      disable_web_page_preview: true,
+      reply_to_message_id: msg.message_id
+    });
+
+    if (!exists) {
+      await saveUserToFirebase(user);
+      const totalUsers = await getTotalUsers();
+      const newUserMsg =
+        "➕ <b>New User Notification</b> ➕\n\n" +
+        "👤<b>User:</b> <a href='tg://user?id=" +
+        user.id +
+        "'>" +
+        user.first_name +
+        "</a>\n\n" +
+        "🆔<b>User ID:</b> <code>" +
+        user.id +
+        "</code>\n\n" +
+        "🌝 <b>Total Users Count: " +
+        totalUsers +
+        "</b>";
+      await bot.sendMessage(admin, newUserMsg, { parse_mode: "HTML" });
+    }
+  } else if (msg.text === "/broadcast" && user.id.toString() === admin) {
     await bot.sendMessage(chatId, "<b>Enter Broadcast Message Here 👇</b>", {
       parse_mode: "HTML"
     });
