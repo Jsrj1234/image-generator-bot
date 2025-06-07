@@ -57,10 +57,8 @@ With just a few words from you, I can create stunning images, art, logos, and mo
 \n
 🖊️ *What to do now?*\n
 Just *send me your idea or prompt* (like “a cat wearing sunglasses on the beach” 😎), and I’ll get to work!\n
-\n
-🕐 *Please wait a moment...* I’ll send your AI-generated image shortly!\n
-\n
-⚡ Let's turn your imagination into pixels – right here, right now!`;
+\n 🕐 *Please wait a moment...* I’ll send your AI-generated image shortly!\n
+\n ⚡ Let's turn your imagination into pixels – right here, right now!`;
 
   await bot.sendMessage(chatId, text, {
     parse_mode: "Markdown",
